@@ -20,7 +20,6 @@
 <h2>Administrar Clientes</h2>
 
 <div ng-controller="clientesController">
-
     <table class="table">
         <thead>
         <tr>
@@ -39,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="cliente in clientes">
+        <tr ng-repeat="cliente in dataClientes.clientes">
             <td>{{ cliente.nit }}</td>
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.direccion }}</td>
@@ -156,7 +155,7 @@
                             <label for="inputEmail3" class="col-sm-3 control-label">Activo</label>
 
                             <div class="col-sm-9">
-                                <input type="checkbox" id="estado" name="estado"
+                                <input type="checkbox" id="estado" name="estado" value="{{estado}}"
                                        ng-model="cliente.estado">
 
                             </div>
@@ -166,8 +165,8 @@
                             <label for="inputEmail3" class="col-sm-3 control-label">Ciudad</label>
 
                             <div class="col-sm-9">
-                                <select name="ciudad_id" id="ciudad_id" ng-model="cliente.ciudad_id" ng-required="true">
-                                    <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                                <select name="ciudad_id" id="ciudad_id" class="form-control" ng-model="cliente.ciudad_id" ng-required="true">
+                                    <option ng-repeat="option in dataClientes.ciudades" value="{{option.id}}">{{option.nombre}}</option>
                                 </select>
                                     <span class="help-inline"
                                           ng-show="frmclientes.ciudad_id.$invalid && frmclientes.ciudad_id.$touched">Ciudad es requerido</span>

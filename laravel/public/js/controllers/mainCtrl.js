@@ -2,7 +2,7 @@ app.controller('clientesController', function($scope, $http, API_URL) {
     //retrieve clientes listing from API
     $http.get(API_URL + "clientes")
         .success(function(response) {
-            $scope.clientes = response;
+            $scope.dataClientes = response;
         });
 
     //show modal form

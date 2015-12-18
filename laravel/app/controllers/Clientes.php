@@ -9,7 +9,9 @@ class Clientes extends \BaseController {
      */
     public function index($id = null) {
         if ($id == null) {
-            return Cliente::orderBy('id', 'asc')->get();
+            $data['clientes'] = Cliente::orderBy('id', 'asc')->get();
+            $data['ciudades'] = Ciudad::orderBy('id', 'asc')->get();
+            return $data;
         } else {
             return $this->show($id);
         }
@@ -79,7 +81,6 @@ class Clientes extends \BaseController {
      */
     public function destroy($id) {
         $Cliente = Cliente::find($id);
-        die(var_dump($Cliente));
 
         $Cliente->delete();
 
