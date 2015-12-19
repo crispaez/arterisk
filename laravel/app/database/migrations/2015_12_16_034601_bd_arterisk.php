@@ -21,10 +21,10 @@ class BdArterisk extends Migration {
 
         Schema::create("usuario", function($tabla){
             $tabla->increments('id');
-            $tabla->string('usuario', 100);
+            $tabla->string('usuario', 100)->unique();
             $tabla->string('nombres', 100);
             $tabla->string('apellidos', 100);
-            $tabla->string('correo', 100);
+            $tabla->string('correo', 100)->unique();
             $tabla->string('contrasena', 100);
             $tabla->boolean('estado');
             $tabla->timestamps();
@@ -32,6 +32,7 @@ class BdArterisk extends Migration {
             $tabla->foreign('perfil_id')
                 ->references('id')->on('perfil')
                 ->onDelete('cascade');
+            $tabla->rememberToken();
         });
 
         Schema::create("pais", function($tabla){
@@ -74,6 +75,14 @@ class BdArterisk extends Migration {
             $tabla->integer('dias_plazo_pago');
             $tabla->boolean('estado');
             $tabla->timestamps();
+            $tabla->integer('pais_id')->unsigned();
+            $tabla->foreign('pais_id')
+                ->references('id')->on('pais')
+                ->onDelete('cascade');
+            $tabla->integer('departamento_id')->unsigned();
+            $tabla->foreign('departamento_id')
+                ->references('id')->on('departamento')
+                ->onDelete('cascade');
             $tabla->integer('ciudad_id')->unsigned();
             $tabla->foreign('ciudad_id')
                 ->references('id')->on('ciudad')

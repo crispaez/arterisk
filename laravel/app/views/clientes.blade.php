@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="es-CO" ng-app="arterisk">
-<head>
-    <title>Prueba Arterisk</title>
+@extends('layouts.master')
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body {
-            padding-top: 30px;
-        }
-
-        form {
-            padding-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
+@section('sidebar')
 <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
         <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
@@ -24,6 +8,9 @@
         <li ng-class="{ active: isActive('/cats')}"><a href="/cats">Cats</a></li>
     </ul>
 </div>
+@stop
+
+@section('content')
 <h2>Administrar Clientes</h2>
 
 <div ng-controller="clientesController">
@@ -46,15 +33,15 @@
         </thead>
         <tbody>
         <tr ng-repeat="cliente in dataClientes.clientes">
-            <td>{{ cliente.nit }}</td>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.direccion }}</td>
-            <td>{{ cliente.telefono }}</td>
-            <td>{{ cliente.celular }}</td>
-            <td>{{ cliente.correo }}</td>
-            <td>{{ cliente.dias_plazo_pago }}</td>
-            <td>{{ cliente.estado }}</td>
-            <td>{{ cliente.ciudad.nombre }}</td>
+            <td><% cliente.nit %></td>
+            <td><% cliente.nombre %></td>
+            <td><% cliente.direccion %></td>
+            <td><% cliente.telefono %></td>
+            <td><% cliente.celular %></td>
+            <td><% cliente.correo %></td>
+            <td><% cliente.dias_plazo_pago %></td>
+            <td><% cliente.estado %></td>
+            <td><% cliente.ciudad.nombre %></td>
             <td>
                 <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', cliente.id)">Editar</button>
                 <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(cliente.id)">Eliminar</button>
@@ -69,17 +56,17 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{form_title}}</h4>
+                    <h4 class="modal-title" id="myModalLabel"><%form_title%></h4>
                 </div>
                 <div class="modal-body">
                     <form name="frmclientes" class="form-horizontal" novalidate="">
 
                         <div class="form-group error">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Nit</label>
+                            <label class="col-sm-3 control-label">Nit</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control has-error" id="nit" name="nit"
-                                       placeholder="Nit" value="{{nit}}"
+                                       placeholder="Nit" value="<%nit%>"
                                        ng-model="cliente.nit" ng-required="true">
                                         <span class="help-inline"
                                               ng-show="frmclientes.nit.$invalid && frmclientes.nit.$touched">Nit es requerido</span>
@@ -87,11 +74,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Nombre</label>
+                            <label class="col-sm-3 control-label">Nombre</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="nombre" name="nombre"
-                                       placeholder="Nombre" value="{{nombre}}"
+                                       placeholder="Nombre" value="<%nombre%>"
                                        ng-model="cliente.nombre" ng-required="true">
                                         <span class="help-inline"
                                               ng-show="frmclientes.nombre.$invalid && frmclientes.nombre.$touched">Nombre es requerido</span>
@@ -99,11 +86,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Dirección</label>
+                            <label class="col-sm-3 control-label">Dirección</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="direccion" name="direccion"
-                                       placeholder="Dirección" value="{{direccion}}"
+                                       placeholder="Dirección" value="<%direccion%>"
                                        ng-model="cliente.direccion" ng-required="true">
                                     <span class="help-inline"
                                           ng-show="frmclientes.direccion.$invalid && frmclientes.direccion.$touched">Dirección es requerido</span>
@@ -111,11 +98,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Telefono</label>
+                            <label class="col-sm-3 control-label">Telefono</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="telefono" name="telefono"
-                                       placeholder="Telefono" value="{{telefono}}"
+                                       placeholder="Telefono" value="<%telefono%>"
                                        ng-model="cliente.telefono" ng-required="true">
                                     <span class="help-inline"
                                           ng-show="frmclientes.telefono.$invalid && frmclientes.telefono.$touched">Telefono es requerido</span>
@@ -123,11 +110,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Celular</label>
+                            <label class="col-sm-3 control-label">Celular</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="celular" name="celular"
-                                       placeholder="Celular" value="{{celular}}"
+                                       placeholder="Celular" value="<%celular%>"
                                        ng-model="cliente.celular" ng-required="true">
                                     <span class="help-inline"
                                           ng-show="frmclientes.celular.$invalid && frmclientes.celular.$touched">Celular es requerido</span>
@@ -135,11 +122,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Correo</label>
+                            <label class="col-sm-3 control-label">Correo</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="correo" name="correo"
-                                       placeholder="Correo" value="{{correo}}"
+                                       placeholder="Correo" value="<%correo%>"
                                        ng-model="cliente.correo" ng-required="true">
                                     <span class="help-inline"
                                           ng-show="frmclientes.correo.$invalid && frmclientes.correo.$touched">Correo es requerido</span>
@@ -147,11 +134,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Dias de plazo para pagar</label>
+                            <label class="col-sm-3 control-label">Dias de plazo para pagar</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="dias_plazo_pago" name="dias_plazo_pago"
-                                       placeholder="Dias de plazo para pagar" value="{{dias_plazo_pago}}"
+                                       placeholder="Dias de plazo para pagar" value="<%dias_plazo_pago%>"
                                        ng-model="cliente.dias_plazo_pago" ng-required="true">
                                     <span class="help-inline"
                                           ng-show="frmclientes.dias_plazo_pago.$invalid && frmclientes.dias_plazo_pago.$touched">Dias de plazo para pagar es requerido</span>
@@ -159,21 +146,45 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Activo</label>
+                            <label class="col-sm-3 control-label">Activo</label>
 
                             <div class="col-sm-9">
-                                <input type="checkbox" id="estado" name="estado" value="{{estado}}"
+                                <input type="checkbox" id="estado" name="estado" value="<%estado%>"
                                        ng-model="cliente.estado">
 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Ciudad</label>
+                            <label class="col-sm-3 control-label">Pais</label>
+
+                            <div class="col-sm-9">
+                                <select name="pais_id" id="pais_id" class="form-control" ng-model="cliente.pais_id" ng-required="true">
+                                    <option ng-repeat="option in dataClientes.paises" value="<%option.id%>"><%option.nombre%></option>
+                                </select>
+                                    <span class="help-inline"
+                                          ng-show="frmclientes.pais_id.$invalid && frmclientes.pais_id.$touched">Pais es requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Departamento</label>
+
+                            <div class="col-sm-9">
+                                <select name="departamento_id" id="departamento_id" class="form-control" ng-model="cliente.departamento_id" ng-required="true">
+                                    <option ng-repeat="option in dataClientes.departamentos" value="<%option.id%>"><%option.nombre%></option>
+                                </select>
+                                    <span class="help-inline"
+                                          ng-show="frmclientes.departamento_id.$invalid && frmclientes.departamento_id.$touched">Departamento es requerido</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ciudad</label>
 
                             <div class="col-sm-9">
                                 <select name="ciudad_id" id="ciudad_id" class="form-control" ng-model="cliente.ciudad_id" ng-required="true">
-                                    <option ng-repeat="option in dataClientes.ciudades" value="{{option.id}}">{{option.nombre}}</option>
+                                    <option ng-repeat="option in dataClientes.ciudades" value="<%option.id%>"><%option.nombre%></option>
                                 </select>
                                     <span class="help-inline"
                                           ng-show="frmclientes.ciudad_id.$invalid && frmclientes.ciudad_id.$touched">Ciudad es requerido</span>
@@ -191,13 +202,4 @@
         </div>
     </div>
 </div>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-
-<script src="<?= asset('js/app.js') ?>"></script>
-<script src="<?= asset('js/controllers/mainCtrl.js') ?>"></script>
-</body>
-</html>
+@stop

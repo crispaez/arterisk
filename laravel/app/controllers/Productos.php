@@ -1,6 +1,6 @@
 <?php
 
-class Clientes extends \BaseController {
+class Productos extends \BaseController {
 
     protected $layout = 'layouts.master';
     protected $reglas = array(
@@ -11,12 +11,11 @@ class Clientes extends \BaseController {
         'celular' => 'required',
         'correo' => 'required|email|unique:usuario',
         'dias_plazo_pago' => 'required|integer',
-        'pais_id' => 'required|integer',
-        'departamento_id' => 'required|integer',
+        'estado' => 'required|integer',
         'ciudad_id' => 'required|integer',
     );
     public function home(){
-        $this->layout->content = View::make('clientes');
+        $this->layout->content = View::make('productos');
     }
 
     /**
@@ -28,7 +27,7 @@ class Clientes extends \BaseController {
         if ($id == null) {
             $data['clientes'] = Cliente::with('Ciudad')->orderBy('id', 'asc')->get();
             $data['ciudades'] = Ciudad::orderBy('id', 'asc')->get();
-            $data['departamentos'] = Departamento::orderBy('id', 'asc')->get();
+            $data['Departamentos'] = Departamento::orderBy('id', 'asc')->get();
             $data['paises'] = Pais::orderBy('id', 'asc')->get();
             return $data;
         } else {
@@ -52,8 +51,6 @@ class Clientes extends \BaseController {
         $Cliente->correo = Input::get('correo');
         $Cliente->dias_plazo_pago = Input::get('dias_plazo_pago');
         $Cliente->estado = Input::get('estado');
-        $Cliente->pais_id = Input::get('pais_id');
-        $Cliente->departamento_id = Input::get('departamento_id');
         $Cliente->ciudad_id = Input::get('ciudad_id');
 
         $validar = Validator::make(
@@ -96,7 +93,6 @@ class Clientes extends \BaseController {
      * @return Response
      */
     public function update($id) {
-
         $Cliente = Cliente::find($id);
 
         $Cliente->nit = Input::get('nit');
@@ -107,8 +103,6 @@ class Clientes extends \BaseController {
         $Cliente->correo = Input::get('correo');
         $Cliente->dias_plazo_pago = Input::get('dias_plazo_pago');
         $Cliente->estado = Input::get('estado');
-        $Cliente->pais_id = Input::get('pais_id');
-        $Cliente->departamento_id = Input::get('departamento_id');
         $Cliente->ciudad_id = Input::get('ciudad_id');
         $validar = Validator::make(
             Input::all(),

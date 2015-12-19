@@ -11,16 +11,22 @@
 |
 */
 
-/*Route::get('/', function()
+
+Route::get('login', array('as' => 'login', 'uses' => 'AuthController@showLogin'));
+Route::post('login', array('as' => 'login', 'uses' => 'AuthController@postLogin'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@logOut'));
+Route::get('/', array('as' => 'index', function(){
+    return View::make('hello');
+}
+));
+
+
+Route::group(['before' => 'auth'], function()
 {
-	return View::make('hello');
-});*/
+    Route::get('/clientes/admin', array('as' => 'homeClientes', 'uses' => 'Clientes@home'));
 
-Route::get('/', function () {
-    return View::make('index');
+    Route::get('/clientes/{id?}', array('as' => 'infoClientes', 'uses' => 'Clientes@index'));
+    Route::post('/clientes', array('as' => 'guardarCliente', 'uses' => 'Clientes@store'));
+    Route::post('/clientes/{id}', array('as' => 'editarCliente', 'uses' => 'Clientes@update'));
+    Route::delete('/clientes/{id}', array('as' => 'eliminarCliente', 'uses' => 'Clientes@destroy'));
 });
-
-Route::get('/clientes/{id?}', 'Clientes@index');
-Route::post('/clientes', 'Clientes@store');
-Route::post('/clientes/{id}', 'Clientes@update');
-Route::delete('/clientes/{id}', 'Clientes@destroy');
