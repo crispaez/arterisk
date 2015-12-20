@@ -12,7 +12,11 @@ class AuthController extends BaseController {
     );
     public function index()
     {
-        $this->layout->content = View::make('hello');
+        if(Auth::check()){
+            $this->layout->content = View::make('hello');
+        }else{
+            return Redirect::route('login');
+        }
     }
 
     public function showLogin()
@@ -41,7 +45,7 @@ class AuthController extends BaseController {
     public function logOut()
     {
         Auth::logout();
-        return Redirect::to('login')->with('error_message', 'La sesión secerro correctamente.');
+        return Redirect::to('login')->with('error_message', 'La sesión se cerro correctamente.');
     }
     public function home(){
         $this->layout->content = View::make('usuarios');
