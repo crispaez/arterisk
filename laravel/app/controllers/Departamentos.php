@@ -1,17 +1,15 @@
 <?php
 
-class Productos extends \BaseController {
+class Departamentos extends \BaseController {
 
     protected $layout = 'layouts.master';
     protected $reglas = array(
         'nombre' => 'required',
-        'referencia' => 'required',
-        'pvp' => 'required|numeric',
-        'marca_id' => 'required|integer',
-        'unidad_medida_id' => 'required|integer',
+        'descripcion' => 'required',
+        'pais_id' => 'required|integer',
     );
     public function home(){
-        $this->layout->content = View::make('productos');
+        $this->layout->content = View::make('departamentos');
     }
 
     /**
@@ -21,9 +19,8 @@ class Productos extends \BaseController {
      */
     public function index($id = null) {
         if ($id == null) {
-            $data['productos'] = Producto::with('Marca')->with('unidadMedida')->orderBy('id', 'asc')->get();
-            $data['marcas'] = Marca::orderBy('id', 'asc')->get();
-            $data['unidadesMedidas'] = UnidadMedida::orderBy('id', 'asc')->get();
+            $data['departamentos'] = Departamento::with('pais')->orderBy('id', 'asc')->get();
+            $data['paises'] = Pais::orderBy('id', 'asc')->get();
             return $data;
         } else {
             return $this->show($id);
@@ -37,12 +34,10 @@ class Productos extends \BaseController {
      * @return Response
      */
     public function store() {
-        $Producto = new Producto;
-        $Producto->nombre = Input::get('nombre');
-        $Producto->referencia = Input::get('referencia');
-        $Producto->pvp = Input::get('pvp');
-        $Producto->marca_id = Input::get('marca_id');
-        $Producto->unidad_medida_id = Input::get('unidad_medida_id');
+        $Departamento = new Departamento;
+        $Departamento->nombre = Input::get('nombre');
+        $Departamento->descripcion = Input::get('descripcion');
+        $Departamento->pais_id = Input::get('pais_id');
 
         $validar = Validator::make(
             Input::all(),
@@ -54,9 +49,9 @@ class Productos extends \BaseController {
             $return['msg'] = $validar->messages();
             return $return;
         }else{
-            if($Producto->save()){
+            if($Departamento->save()){
                 $return['ok'] = true;
-                $return['msg'] = 'El producto ha sido guardado';
+                $return['msg'] = 'La ciudad ha sido guardado';
                 return $return;
             }else{
                 $return['ok'] = false;
@@ -73,7 +68,7 @@ class Productos extends \BaseController {
      * @return Response
      */
     public function show($id) {
-        return Producto::find($id);
+        return Departamento::find($id);
     }
 
     /**
@@ -84,13 +79,11 @@ class Productos extends \BaseController {
      * @return Response
      */
     public function update($id) {
-        $Producto = Producto::find($id);
+        $Departamento = Departamento::find($id);
 
-        $Producto->nombre = Input::get('nombre');
-        $Producto->referencia = Input::get('referencia');
-        $Producto->pvp = Input::get('pvp');
-        $Producto->marca_id = Input::get('marca_id');
-        $Producto->unidad_medida_id = Input::get('unidad_medida_id');
+        $Departamento->nombre = Input::get('nombre');
+        $Departamento->descripcion = Input::get('descripcion');
+        $Departamento->pais_id = Input::get('pais_id');
         $validar = Validator::make(
             Input::all(),
             $this->reglas
@@ -101,9 +94,9 @@ class Productos extends \BaseController {
             $return['msg'] = $validar->messages();
             return $return;
         }else{
-            if($Producto->save()){
+            if($Departamento->save()){
                 $return['ok'] = true;
-                $return['msg'] = 'El producto ha sido guardado';
+                $return['msg'] = 'La producto ha sido guardado';
                 return $return;
             }else{
                 $return['ok'] = false;
@@ -120,9 +113,9 @@ class Productos extends \BaseController {
      * @return Response
      */
     public function destroy($id) {
-        $Producto = Producto::find($id);
+        $Departamento = Departamento::find($id);
 
-        $Producto->delete();
+        $Departamento->delete();
 
         return Input::get('id');
     }

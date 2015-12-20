@@ -1,14 +1,8 @@
 @extends('layouts.master')
 
-@section('sidebar')
-<div class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-        <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
-        <li ng-class="{ active: isActive('/dogs')}"><a href="/dogs">Dogs</a></li>
-        <li ng-class="{ active: isActive('/cats')}"><a href="/cats">Cats</a></li>
-    </ul>
-</div>
-@stop
+@section('js')
+<script src="<?= asset('js/controllers/clientesController.js') ?>"></script>
+@show
 
 @section('content')
 <h2>Administrar Clientes</h2>
@@ -17,6 +11,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Nit</th>
             <th>Nit</th>
             <th>Nombre</th>
             <th>Dirección</th>
@@ -195,7 +190,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)"
-                            ng-disabled="frmclientes.$invalid">Save changes
+                            ng-disabled="frmclientes.$invalid">Guardar
                     </button>
                 </div>
             </div>

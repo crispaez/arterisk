@@ -167,6 +167,7 @@ class BdArterisk extends Migration {
 
         Schema::create("item_menu", function($tabla){
             $tabla->increments('id');
+            $tabla->text('etiqueta');
             $tabla->integer('permiso_id')->unsigned();
             $tabla->foreign('permiso_id')
                 ->references('id')->on('permiso')

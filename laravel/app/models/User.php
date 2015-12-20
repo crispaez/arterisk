@@ -23,4 +23,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('contrasena', 'remember_token');
 
+    public function perfil()
+    {
+        return $this->hasOne('Perfil', 'id', 'perfil_id');
+    }
+
 }

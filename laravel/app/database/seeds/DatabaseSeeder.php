@@ -52,6 +52,16 @@ class PoblarPerfilesSeeder extends Seeder {
             'departamento_id' => 1,
         ));
 
+        DB::table('menu')->insert(array(
+            'nombre' => 'principal',
+            'descripcion' => 'Menu principal',
+        ));
+
+        DB::table('menu')->insert(array(
+            'nombre' => 'menu_derecho',
+            'descripcion' => 'Menu derecho',
+        ));
+
         User::create([
             'usuario' => 'admin',
             'nombres' => 'Sistema',

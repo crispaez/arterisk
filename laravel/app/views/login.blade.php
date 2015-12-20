@@ -1,8 +1,5 @@
 @extends('layouts.master')
 
-@section('sidebar')
-@stop
-
 @section('content')
 {{ Form::open(['url' => 'login', 'class'=>'form-horizontal']) }}
 
@@ -10,7 +7,7 @@
 {{ Session::get('error_message') }}
 @endif
 
-<h2>Log in</h2>
+<h2>Inicio de sesión</h2>
 <div class="form-group error">
     {{ Form::label('correo', 'Correo', ['class'=>'col-sm-3 control-label']) }}
 
