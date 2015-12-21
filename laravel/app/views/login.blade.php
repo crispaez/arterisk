@@ -9,7 +9,7 @@
 
 <h2>Inicio de sesión</h2>
 <div class="form-group error">
-    {{ Form::label('correo', 'Correo', ['class'=>'col-sm-3 control-label']) }}
+    {{ Form::label('correo', 'Usuario', ['class'=>'col-sm-3 control-label']) }}
 
     <div class="col-sm-9">
         {{ Form::text('correo', '', ['class'=>'form-control has-error']) }}
