@@ -32,6 +32,12 @@ Route::filter('perfil', function()
 
 Route::group(['before' => 'auth|perfil'], function()
 {
+    Route::get('facturas', array('as'=>'facturas', function(){
+        return 'Facturas aqui.';
+    }));
+    Route::get('reportes',  array('as'=>'reportes', function(){
+        return 'Reportes aqui.';
+    }));
 
     Route::group(array('prefix' => 'clientes'), function()
     {
